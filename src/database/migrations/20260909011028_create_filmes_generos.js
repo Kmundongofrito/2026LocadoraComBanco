@@ -3,15 +3,8 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-     return knex.schema.createTable("locacoes", (table) => {
+     return knex.schema.createTable("filmes_generos", (table) => {
          table.increments("id").primary()
-
-        table.integer("filme_id")
-        .unsigned()
-        .notNullable()
-        .references("id")
-        .inTable("filmes")
-        .onDelete("CASCADE")
 
         table.integer("genero_id")
         .unsigned()
@@ -19,7 +12,16 @@ exports.up = function(knex) {
         .references("id")
         .inTable("generos")
         .onDelete("CASCADE")
+        
+        table.integer("filme_id")
+        .unsigned()
+        .notNullable()
+        .references("id")
+        .inTable("filmes")
+        .onDelete("CASCADE")
+
      })
+     
 };
 
 /**
@@ -27,5 +29,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-  
+   return knex.schema.dropTable("filmes_generos")
 };
